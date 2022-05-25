@@ -5,7 +5,7 @@ import android.util.Log
 class Cobalt {
 
     init {
-        Log.d("LOG_COBALT", "Cobalt ")
+        Log.d("LOG_COBALT", "Cobalt $this")
     }
 
 }
