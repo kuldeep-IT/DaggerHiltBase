@@ -3,12 +3,17 @@ package com.example.mvvmwithdi
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModel
+import com.example.mvvmwithdi.constants.Constants.ERROR_OBJECT
+import com.example.mvvmwithdi.constants.Constants.USER_LIST
+import com.example.mvvmwithdi.constants.Constants.USER_OBJECT
+import com.example.mvvmwithdi.model.User
 import com.example.mvvmwithdi.ui.Resource
+import com.example.mvvmwithdi.utils.Utils.getArrayBody
+import com.example.mvvmwithdi.utils.Utils.getObjectBody
 import com.example.mvvmwithdi.viewmodel.DataViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 //Processor : Application
@@ -29,14 +34,36 @@ class MainActivity : AppCompatActivity() {
             when(response){
                 is Resource.Success -> {
 //                    hideProgressBar()
-                    response.data?.let { newsResponse ->
-                        Log.d("API_RESPONSE", "${newsResponse} ")
+                    when(response.endpoint){
+                        USER_LIST -> {
+                            response.data?.let { reponseData ->
+                                val arrayUser = reponseData.getArrayBody<ArrayList<User>, User>(className = User::class.java)
+                                Log.d("API_RESPONSE", "HELLO")
+//                        Log.d("API_RESPONSE", "${response.getBody<ArrayList<User>, User>(className = User::class.java)} ")
+                            }
+                        }
+                        USER_OBJECT->{
+                            response.data?.let { reponseData ->
+                                val userModel = reponseData.getObjectBody<User>(className = User::class.java)
+                                Log.d("API_RESPONSE", "HELLO")
+//                        Log.d("API_RESPONSE", "${response.getBody<ArrayList<User>, User>(className = User::class.java)} ")
+                            }
+                        }
+                        ERROR_OBJECT->{
+                            Log.d("API_ERROR", "ERROR")
+                        }
                     }
+
+                }
+                is Resource.Error -> {
+                    Log.d("API_ERROR", response.message.toString())
                 }
             }
         }
 
-        dataViewModel.getData()
+        dataViewModel.getData(USER_LIST)
+        dataViewModel.postDataApi(USER_OBJECT, User())
+        dataViewModel.getData(ERROR_OBJECT)
 
     }
 

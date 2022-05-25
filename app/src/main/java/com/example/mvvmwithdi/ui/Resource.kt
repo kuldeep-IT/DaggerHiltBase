@@ -1,14 +1,14 @@
 package com.example.mvvmwithdi.ui
 
 
+sealed class Resource<T>(
+    val data: T? = null,
+    val endpoint: String? = null,
+    val message: String? = null,
+) {
 
-    sealed class Resource<T>(
-        val data: T? = null,
-        val message: String? = null
-    ) {
+    class Success<T>(data: T?, endpoint: String?) : Resource<T>(data, endpoint)
+    class Error<T>(message: String?) : Resource<T>(message = message)
+    class Loading<T> : Resource<T>()
 
-        class Success<T>(data: T?): Resource<T>(data)
-        class Error<T>(message: String?,data: T?=null): Resource<T>(data, message)
-        class Loading<T>: Resource<T>()
-
-    }
+}
