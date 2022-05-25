@@ -4,8 +4,9 @@
     package="com.example.mvvmwithdi">
 
     <application
-        android:name=".MainApplication"
+        android:name=".utils.App"
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"

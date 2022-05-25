@@ -3,9 +3,9 @@ package com.example.mvvmwithdi
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import com.example.mvvmwithdi.model.Battery
-import com.example.mvvmwithdi.model.Processor
+import androidx.activity.viewModels
+import com.example.mvvmwithdi.model.Data
+import com.example.mvvmwithdi.viewmodel.DataViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -17,45 +17,28 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var mobile1: Mobile
-
-    @Inject
-    lateinit var mobile2: Mobile
-
-    @Inject
-    lateinit var battery1: Battery
-
-    @Inject
-    lateinit var battery2: Battery
-
-    @Inject
-    lateinit var processor1: Processor
-
-    @Inject
-    lateinit var processor2: Processor
+     private val mViewModel: DataViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        Log.d("LOG_MAIN", "onCreate: "+BatteryModule.getBattery(mobile.battery.lithium, mobile.battery.cobalt))
-//        Log.d("LOG_MAIN", "onCreate: LITHIUM "+BatteryModule.getLithium().test())
-//        Log.d("LOGD_MAIN", "onCreate: "+ mobile1 + " $mobile1")
-//        Log.d("LOGD_MAIN", "onCreate: "+ mobile2 + " $mobile2")
+        mViewModel.insertAllData(
+            Data(1,"hbdfg","nfdgmdfgmnbdfg"),
+            Data(2,"fnbghdfbg","nfdgmdfgmnbdfg"),
+            Data(3,"hbdfgfmgbdfnbg","nfdgmdfgmnbdfg"),
+            Data(4,"hbdfg","dfm,gnnfdgmdfgmnbdfg"),
+            Data(5,"hbdfg","nfdgmdm,ndfgnfgmnbdfg"),
+            Data(6,"hbdfg","nfdgmdfgmnbdfm,nfgg"),
+            Data(7,"hbdfg","nfdgmdfgmnbdfgvm,nb"),
+            Data(8,"hbdfg","nfdgmdfgmnbdfgzdfn dfbmn "),
+        )
 
-        Log.d("LOG_DAGGER", "MainActivity:::::::::::::::::::::::::::::: ")
-        Log.d("LOG_DAGGER", "MainActivity: processor1 $processor1")
-        Log.d("LOG_DAGGER", "MainActivity: processor2 $processor2")
-        Log.d("LOG_DAGGER", "MainActivity: battery1 $battery1")
-        Log.d("LOG_DAGGER", "MainActivity: battery2 $battery2")
+        mViewModel.dataLiveData.observe(this){
+            Log.d("LOG_DATA", "onCreate: "+ it)
+        }
 
-        replace(MainFragment())
     }
 
-    fun replace(fragment: Fragment){
-        val beginTransaction = supportFragmentManager.beginTransaction()
-        beginTransaction.replace(R.id.flayout, fragment)
-        beginTransaction.commit()
-    }
+
 }
