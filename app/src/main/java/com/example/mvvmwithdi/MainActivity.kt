@@ -36,15 +36,17 @@ class MainActivity : AppCompatActivity() {
 //                    hideProgressBar()
                     when(response.endpoint){
                         USER_LIST -> {
-                            response.data?.let { reponseData ->
-                                val arrayUser = reponseData.getArrayBody<ArrayList<User>, User>(className = User::class.java)
+                            response.data?.let { responseData ->
+                                val arrayUser = responseData.getArrayBody<ArrayList<User>, User>(className = User::class.java)
                                 Log.d("API_RESPONSE", "HELLO")
 //                        Log.d("API_RESPONSE", "${response.getBody<ArrayList<User>, User>(className = User::class.java)} ")
+
                             }
                         }
                         USER_OBJECT->{
-                            response.data?.let { reponseData ->
-                                val userModel = reponseData.getObjectBody<User>(className = User::class.java)
+                            response.data?.let { responseData ->
+                                val userModel = responseData.getObjectBody<User>(className = User::class.java)
+
                                 Log.d("API_RESPONSE", "HELLO")
 //                        Log.d("API_RESPONSE", "${response.getBody<ArrayList<User>, User>(className = User::class.java)} ")
                             }
