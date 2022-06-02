@@ -15,6 +15,8 @@ interface DataAPI {
     @POST
     suspend fun postApiData(@Url endPoint: String, @HeaderMap hashMap: HashMap<String, String>, @Body requestClass: Any): Response<ResponseBody>
 
+    @PUT
+    fun putApiData(@Url endPoint: String, @HeaderMap hashMap: HashMap<String, String>, @Body requestClass: Any): Response<ResponseBody>
 
 
 //    @GET("/posts")

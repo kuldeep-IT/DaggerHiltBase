@@ -51,5 +51,12 @@ class DataViewModel @Inject constructor(
         _data.postValue(handleData(responseData, endpoint))
     }
 
-
+    fun putDataApi(endpoint: String, body : Any) = viewModelScope.launch {
+        //TODO: Get token from datastore and also make code optimization for token
+        var headers = HashMap<String, String>()
+        headers["Content-Type"] = "application/json"
+        headers["Authorization"] = "Bearer dbnjkansfklasfn2554121343"
+        val responseData = repository.putApiData(endpoint , headers , body)
+        _data.postValue(handleData(responseData, endpoint))
+    }
 }

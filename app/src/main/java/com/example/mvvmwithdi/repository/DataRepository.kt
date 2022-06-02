@@ -9,5 +9,5 @@ class DataRepository @Inject constructor(val dataAPI: DataAPI) {
 
     suspend fun getData(endpoint : String) = dataAPI.getData(endpoint)
     suspend fun postApiData(endpoint : String , headers : HashMap<String, String>, body : Any) = dataAPI.postApiData(endpoint , headers , body)
-
+    suspend fun putApiData(endpoint : String , headers : HashMap<String, String>, body : Any) = dataAPI.putApiData(endpoint, headers, body)
 }

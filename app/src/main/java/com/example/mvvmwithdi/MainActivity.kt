@@ -20,6 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 //Battery : Activity
 //Camera :  Fragment
 
+/*info: https://blog.mindorks.com/dagger-hilt-tutorial*/
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity() {
 
         dataViewModel.getData(USER_LIST)
         dataViewModel.postDataApi(USER_OBJECT, User())
+        dataViewModel.putDataApi(USER_OBJECT,User())
         dataViewModel.getData(ERROR_OBJECT)
 
     }

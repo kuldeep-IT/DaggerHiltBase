@@ -10,6 +10,7 @@ import kotlin.reflect.KClass
 
 object Utils {
 
+    //Json to Array
     fun <A, U> Response<ResponseBody>.getArrayBody(className: Class<U>): ArrayList<A> {
         val body = this.body()?.string()
         val objectMapper = ObjectMapper();
@@ -18,6 +19,7 @@ object Utils {
         return arrayList;
     }
 
+    //Json to Object
     fun <T> Response<ResponseBody>.getObjectBody(className: Class<T>): T {
         val body = this.body()?.string()
         val json = JSONObject(body)
