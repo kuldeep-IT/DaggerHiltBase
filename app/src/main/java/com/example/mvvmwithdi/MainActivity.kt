@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
                     when(response.endpoint){
                         USER_LIST -> {
                             response.data?.let { responseData ->
-                                val arrayUser = responseData.getArrayBody<ArrayList<User>, User>(className = User::class.java)
+                                Log.d("API_RESPONSE", responseData.toString())
+                                val arrayUser = responseData.getArrayBody<ArrayList<User>/*User*/, User>(className = User::class.java)
                                 Log.d("API_RESPONSE", "HELLO")
 //                        Log.d("API_RESPONSE", "${response.getBody<ArrayList<User>, User>(className = User::class.java)} ")
 
@@ -66,8 +67,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         dataViewModel.getData(USER_LIST)
-        dataViewModel.postDataApi(USER_OBJECT, User())
-        dataViewModel.putDataApi(USER_OBJECT,User())
+//        dataViewModel.postDataApi(USER_OBJECT, User())
+//        dataViewModel.putDataApi(USER_OBJECT,User())
         dataViewModel.getData(ERROR_OBJECT)
 
     }
